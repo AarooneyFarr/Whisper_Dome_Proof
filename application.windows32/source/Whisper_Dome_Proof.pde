@@ -1,6 +1,6 @@
 void setup()
 {
- size(400,400); 
+ size(800,800); 
 }
 int Cs = 800;
 int r = Cs/2; 
@@ -9,34 +9,33 @@ int r = Cs/2;
 void draw () {
   stroke(0, 0, 0);
   
-  strokeWeight(3);
-    float cx = constrain(mouseX,100,300);
-    float x = cx-200;
-    float slope = (1/(2*sqrt(sq(100)-sq(x))))*(-2*x);
+    float cx = constrain(mouseX,0,800);
+    float x = cx-r;
+    float slope = (1/(2*sqrt(sq(r)-sq(x))))*(-2*x);
 
-    float point2 = 400-cx;
-    float circleY = -sqrt(sq(100)-sq(x))+200;
+    float point2 = Cs-cx;
+    float circleY = -sqrt(sq(r)-sq(x))+r;
     float slope2 = tan((atan((slope)))-(radians(90)-((atan((slope))))));
     background(144, 240, 234);
     stroke(0, 0, 0);
     strokeWeight(2);
     noFill();
 
-    ellipse(200, 200, 200, 200);
+    ellipse(r, r, Cs, Cs);
     strokeWeight(4);
-    line(100,199,300,200);
+    line(0,r,Cs,r);
     strokeWeight(9);
 
-    point(cx,200);
-    point(point2,200);
+    point(cx,r);
+    point(point2,r);
     point(cx,circleY);
-    point(interceptChecker(100,slope2,cx,circleY),circle(interceptChecker(100,slope2,cx,circleY),100)); 
+   // point(interceptChecker(r,slope2,cx,circleY),circle(interceptChecker(r,slope2,cx,circleY),r)); 
     
     strokeWeight(1);
-    line(cx,200,cx,circleY);
+    line(cx,r,cx,circleY);
    // slopeLine(mouseX,circleY,slope, 400);
    // slopeLine(mouseX,circleY,(-1/slope),400);
-    ray(cx,circleY,slope2,400);
+    ray(cx,circleY,slope2,Cs);
     
    
    
@@ -44,7 +43,7 @@ void draw () {
     
     fill(144, 240, 234);
     noStroke();
-    rect(0,200,400,200);
+    rect(0,r,Cs,Cs);
     
      fill(0, 0, 0);
      text("Derivitave is " + slope,10,10);
@@ -59,7 +58,7 @@ float interceptChecker(float radius, float slope , float xCor, float yCor)
 };
 float circle(float xPos, float radius)
 {
-  float y = -sqrt(sq(radius)-sq(xPos-200))+200;
+  float y = -sqrt(sq(radius)-sq(xPos-r))+r;
   return y;
 };
 
@@ -70,7 +69,7 @@ void slopeLine(float x, float y, float slope, float size)
 
 void ray(float x, float y, float slope, float size)
 {
-  if(x <= 200)
+  if(x <= r)
   {
 
     line(x+size,((-slope*((x+size)-x))+y),x,((-slope*((x)-x))+y));
